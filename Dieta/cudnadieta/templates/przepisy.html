@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przepisy</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            text-align: center;
+            padding: 10px;
+            background-color: white;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        h2 {
+            font-size: 64px;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            font-size: 25px;
+        }
+
+        .container {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .container_menu {
+            width: 80%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+.container_menu {
+  width: 100%;
+  }
+}
+
+.menu-item {
+  position: relative;
+  text-align: center;
+  width: 12.5%;
+  cursor: pointer;
+  transition: border-bottom 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+@media (max-width: 1200px) {
+.menu-item {
+  width: 100%;
+  padding: 5px;
+  }
+}
+
+
+
+        .menu-title {
+            cursor: pointer;
+            color: #2b3d4b;
+            text-decoration: none;
+        }
+
+        .menu-item-user {
+            margin-left: 50px;
+            color: black;
+        }
+
+        .menu-title:hover {
+            color: #3e87ba;
+        }
+
+        .menu-title-nolink {
+            cursor: default;
+            color: #2b3d4b;
+            text-decoration: none;
+        }
+
+        .submenu {
+            display: none;
+            background-color: white;
+            position: absolute;
+            padding: 10px;
+            z-index: 1;
+            text-align: center;
+            min-width: 100%;
+        }
+
+        .submenu::before {
+            content: "";
+            display: block;
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .menu-item:hover .submenu {
+            display: block;
+        }
+
+        .submenu a {
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            color: #47375b;
+            transition: border-bottom 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .submenu a:hover {
+            color: #3e87ba;
+            border-bottom: 2px solid #3e87ba;
+        }
+
+        .non-link {
+            cursor: default;
+            pointer-events: none;
+            color: #2b3d4b;
+            text-decoration: none;
+        }
+
+        .last-item {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <i class="fas fa-bars mobile-menu-icon" id="mobileMenuIcon"></i>
+        <div class="container_menu">
+            <div class="menu-item">
+                <a class="menu-title" href="/">Logowanie</a>
+            </div>
+            <div class="menu-item">
+                <a class="menu-title" href="/info">Informacje</a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-title" href="/calc">Kalkulator</a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-title" href="/kalorie">Kalorie</a>
+            </div>
+
+            <div class="menu-item-user">
+                {% if user.is_authenticated %}
+                    <p>Witaj, <b>{{ user.username }}</b>!</p>
+                {% else %}
+                    <p>Nie jesteś zalogowany.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        .text_kont {
+            width: 60%;
+            margin: 0 auto;
+            text-align: left;
+            margin-bottom: 50px;
+        }
+
+        img {
+            width: 60%;
+            display: block;
+            margin: auto;
+            margin-bottom: 30px;
+        }
+    </style>
+
+<div class="text_kont">
+    <h3>Przepisy Cudnej Diety!</h3>
+    <p>Skorzystaj z naszych gotowych przepisów i zadbaj o ilość spożywanych kalorii</p>
+
+
+<h2>Śniadanie: Omlet ze Szpinakiem</h2>
+
+    <div class="recipe-container">
+        <img class="recipe-image" src="{% static '/media/omlet.jpg' %}" alt="Omlet ze Szpinakiem">
+
+        <div class="recipe-details">
+            <p><strong>Ilość kalorii:</strong> 350 kcal</p>
+
+            <h3>Składniki:</h3>
+            <ul class="recipe-ingredients">
+                <li>3 jajka</li>
+                <li>50g świeżego szpinaku</li>
+                <li>30g sera feta</li>
+                <li>Sól i pieprz do smaku</li>
+            </ul>
+
+            <h3>Opis przygotowania:</h3>
+            <p>1. W misce roztrzep jajka i dodaj szpinak.</p>
+            <p>2. Na patelnię dodaj jajka ze szpinakiem i smaż na średnim ogniu.</p>
+            <p>3. Gdy jajka zaczną się ścinać, posyp serem feta.</p>
+            <p>4. Smaż do momentu, aż jajka będą ścięte, a ser lekko rozpuszczony.</p>
+            <p>5. Dopraw solą i pieprzem według smaku.</p>
+            <br>
+            <hr>
+            <br>
+
+             <h2>Drugie Śniadanie: Koktajl Owocowy</h2>
+
+    <div class="recipe-container">
+        <img class="recipe-image" src="{% static '/media/koktajl.jpg' %}" alt="Koktajl owocowy">
+
+        <div class="recipe-details">
+            <p><strong>Ilość kalorii:</strong> 200 kcal</p>
+
+            <h3>Składniki:</h3>
+            <ul class="recipe-ingredients">
+                <li>1 banan</li>
+                <li>100g truskawek</li>
+                <li>1/2 szklanki soku pomarańczowego</li>
+                <li>2 łyżki jogurtu naturalnego</li>
+            </ul>
+
+            <h3>Opis przygotowania:</h3>
+            <p>1. W blenderze połącz banana, truskawki, sok pomarańczowy i jogurt.</p>
+            <p>2. Miksuj składniki do uzyskania gładkiego koktajlu.</p>
+            <p>3. Napój podawaj schłodzony.</p>
+        <br>
+            <hr>
+            <br>
+
+    <h2>Podwieczorek: Sałatka z Tuńczykiem</h2>
+
+    <div class="recipe-container">
+        <img class="recipe-image" src="{% static '/media/salatka.jpg' %}" alt="Sałatka z Tuńczykiem">
+
+        <div class="recipe-details">
+            <p><strong>Ilość kalorii:</strong> 300 kcal</p>
+
+            <h3>Składniki:</h3>
+            <ul class="recipe-ingredients">
+                <li>100g tuńczyka (odcedzonego)</li>
+                <li>Mix sałat (rukola, szpinak, lodowa)</li>
+                <li>Pomidor</li>
+                <li>Papryka czerwona</li>
+                <li>Oliwa z oliwek</li>
+                <li>Sól i pieprz do smaku</li>
+            </ul>
+
+            <h3>Opis przygotowania:</h3>
+            <p>1. Na talerzu ułóż mix sałat.</p>
+            <p>2. Dodaj pokrojone w kostkę pomidory i paprykę.</p>
+            <p>3. Na wierzchu umieść odcedzonego tuńczyka.</p>
+            <p>4. Polej sałatkę oliwą z oliwek, dopraw solą oraz pieprzem.</p>
+        <br>
+            <hr>
+            <br>
+
+         <h2>Obiad: Kurczak z Warzywami</h2>
+
+    <div class="recipe-container">
+        <img class="recipe-image" src="{% static '/media/Kurczak.jpg' %}" alt="Kurczak z Warzywami">
+
+        <div class="recipe-details">
+            <p><strong>Ilość kalorii:</strong> 400 kcal</p>
+
+            <h3>Składniki:</h3>
+            <ul class="recipe-ingredients">
+                <li>Pierś z kurczaka</li>
+                <li>Bataty</li>
+                <li>Brokuły</li>
+                <li>Papryka</li>
+                <li>Oliwa z oliwek</li>
+                <li>Sól, pieprz, przyprawy do smaku</li>
+            </ul>
+
+            <h3>Opis przygotowania:</h3>
+            <p>1. Kurczaka pokrój na 3cm kawałki, a warzywa na mniejszą kostkę.</p>
+            <p>2. Wymieszaj kurczaka i warzywa w misce.</p>
+            <p>3. Dodaj oliwę z oliwek oraz przyprawy, wymieszaj.</p>
+            <p>4. Umieść na blasze do pieczenia i piecz w piekarniku przez 30-40 minut.</p>
+        <br>
+            <hr>
+            <br>
+
+    <h2>Kolacja: Sałatka Caprese</h2>
+
+    <div class="recipe-container">
+        <img class="recipe-image" src="{% static '/media/caprese.jpg' %}" alt="Sałatka Caprese">
+
+        <div class="recipe-details">
+            <p><strong>Ilość kalorii:</strong> 250 kcal</p>
+
+            <h3>Składniki:</h3>
+            <ul class="recipe-ingredients">
+                <li>Pomidory</li>
+                <li>Mozzarella</li>
+                <li>Świeża bazylia</li>
+                <li>Oliwa z oliwek</li>
+                <li>Sól, pieprz do smaku</li>
+            </ul>
+
+            <h3>Opis przygotowania:</h3>
+            <p>1. Pokrój pomidory i mozzarellę w plastry.</p>
+            <p>2. Na talerzu układaj warstwy pomidorów, mozzarelli i liści bazylii.</p>
+            <p>3. Polej oliwą z oliwek, posól i popieprz.</p>
+            <p>4. Sałatkę podawaj schłodzoną.</p>
+       <br>
+            <hr>
+            <br>
+</div>
+        </div>
+            </div>
+        </div>
+            </div>
+        <div>
+            </div>
+        </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
