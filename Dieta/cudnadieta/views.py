@@ -1,13 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .forms import CalorieEntryForm
+from django.contrib.auth import logout
+
 
 def home_view(request):
     return render(request, 'home.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 @login_required
 def kalk_view(request):
