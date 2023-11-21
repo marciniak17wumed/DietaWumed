@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informacje</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+body {
+text-align: center;
+padding: 10px;
+background-color: white;
+align-items: center;
+margin-top: 60px;
+}
+
+h2 {
+font-size: 64px;
+margin-bottom: 30px;
+}
+
+h4 {
+font-size: 25px;
+}
+
+.container {
+width: 80%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+text-align: center;
+margin-bottom: 60px;
+}
+
+.container_menu {
+width: 80%;
+display: flex;
+justify-content: flex-end;
+padding: 10px;
+text-align: center;
+}
+
+@media (max-width: 1200px) {
+.container_menu {
+width: 100%;
+}
+}
+
+.menu-item {
+position: relative;
+text-align: center;
+width: 12.5%;
+cursor: pointer;
+transition: border-bottom 0.3s;
+border-bottom: 2px solid transparent;
+}
+
+@media (max-width: 1200px) {
+.menu-item {
+width: 100%;
+padding: 5px;
+}
+}
+
+.menu-title {
+cursor: pointer;
+color: #2b3d4b;
+text-decoration: none;
+}
+
+.menu-item-user {
+margin-left: 50px;
+color: black;
+}
+
+.menu-title:hover {
+color: #3e87ba;
+}
+
+.menu-title-nolink {
+cursor: default;
+color: #2b3d4b;
+text-decoration: none;
+}
+
+.submenu {
+display: none;
+background-color: white;
+position: absolute;
+padding: 10px;
+z-index: 1;
+text-align: center;
+min-width: 100%;
+}
+
+.submenu::before {
+content: "";
+display: block;
+width: 100%;
+border-bottom: 1px solid #ccc;
+margin-bottom: 10px;
+}
+
+.menu-item:hover .submenu {
+display: block;
+}
+
+.submenu a {
+text-decoration: none;
+display: block;
+padding: 3px 0;
+color: #47375b;
+transition: border-bottom 0.3s;
+border-bottom: 2px solid transparent;
+}
+
+.submenu a:hover {
+color: #3e87ba;
+border-bottom: 2px solid #3e87ba;
+}
+
+.non-link {
+cursor: default;
+pointer-events: none;
+color: #2b3d4b;
+text-decoration: none;
+}
+
+.last-item {
+margin-right: 0;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <i class="fas fa-bars mobile-menu-icon" id="mobileMenuIcon"></i>
+        <div class="container_menu">
+            <div class="menu-item">
+                <a class="menu-title" href="/">Logowanie</a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-title" href="/calc">Kalkulator</a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-title" href="/przepisy">Przepisy</a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-title" href="/kalorie">Kalorie</a>
+            </div>
+
+            <div class="menu-item-user">
+                {% if user.is_authenticated %}
+                    <p>Witaj, <b>{{ user.username }}</b>!</p>
+                {% else %}
+                    <p>Nie jesteś zalogowany.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .text_kont {
+            width: 60%;
+            margin: 0 auto;
+            text-align: left;
+            margin-bottom: 50px;
+        }
+    </style>
+
+<div class="text_kont">
+    <h3>Jak działa <a href="/calc">kalkulator kalorii</a>?</h3>
+    <p>Nasz kalkulator kalorii pomaga określić dzienną ilość kalorii, którą powinieneś spożywać, aby osiągnąć swoje cele związane z parametrami własnego ciała.</p>
+
+    <h3>Cele kalkulatora:</h3>
+    <ul>
+        <li>Zmniejszanie wagi</li>
+        <li>Utrzymanie wagi</li>
+        <li>Zwiększanie wagi</li>
+    </ul>
+
+    <h3>Jak korzystać z kalkulatora?</h3>
+    <p>Aby skorzystać z kalkulatora, wypełnij formularz z danymi takimi jak wiek, waga, wzrost, płeć, aktywność fizyczna i cel. <br>
+        Po kliknięciu przycisku "Oblicz", otrzymasz spersonalizowany plan kaloryczności swoich posiłków.</p>
+
+    <h3><a href="/kalorie">Kalkulatory produktów oraz spalania kalorii</a>!</h3>
+    <p>Dodatkowo przygotowaliśmy kalkulatory, dzięki którym dowiesz się ile kalorii posiadają składniki Twoich produktów takich jak białko, węglowodany i tłuszcze. <br>
+        Dzięki temu będziesz mógł lepiej planować nad użytymi produktami spożywczymi.</p>
+    <p>Do dyspozycji masz jeszcze kalkulator, który powie ci ile musisz poświęcić czasu na aktywność aby spalić określoną ilość kalorii.</p>
+
+    <h3>Ważne informacje:</h3>
+    <p>Pamiętaj, że przed rozpoczęciem jakiejkolwiek diety zawsze warto skonsultować się z lekarzem lub dietetykiem.</p>
+<center>
+    <p>Dziękujemy za korzystanie z naszego serwisu!</p>
+</center>
+</div>
+</body>
+</html>
