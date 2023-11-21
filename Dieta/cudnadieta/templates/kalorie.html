@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator Kalorii</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+body {
+text-align: center;
+padding: 10px;
+background-color: white;
+align-items: center;
+margin-top: 60px;
+font-family: Arial, sans-serif;
+}
+
+h2 {
+font-size: 64px;
+margin-bottom: 30px;
+}
+
+h4 {
+font-size: 25px;
+}
+
+.container {
+width: 80%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+text-align: center;
+margin-bottom: 60px;
+}
+
+.container_menu {
+width: 80%;
+display: flex;
+justify-content: flex-end;
+padding: 10px;
+text-align: center;
+}
+
+@media (max-width: 1200px) {
+.container_menu {
+width: 100%;
+}
+}
+
+.menu-item {
+position: relative;
+text-align: center;
+width: 12.5%;
+cursor: pointer;
+transition: border-bottom 0.3s;
+border-bottom: 2px solid transparent;
+}
+
+@media (max-width: 1200px) {
+.menu-item {
+width: 100%;
+padding: 5px;
+}
+}
+
+
+
+.menu-title {
+cursor: pointer;
+color: #2b3d4b;
+text-decoration: none;
+}
+
+.menu-item-user {
+margin-left: 50px;
+color: black;
+}
+
+.menu-title:hover {
+color: #3e87ba;
+}
+
+.menu-title-nolink {
+cursor: default;
+color: #2b3d4b;
+text-decoration: none;
+}
+
+.non-link {
+cursor: default;
+pointer-events: none;
+color: #2b3d4b;
+text-decoration: none;
+}
+
+.last-item {
+margin-right: 0;
+}
+
+
+.tooltip .tooltiptext {
+visibility: hidden;
+width: 120px;
+background-color: #555;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 5px;
+position: absolute;
+z-index: 1;
+bottom: 125%;
+left: 50%;
+margin-left: -60px;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.tooltip:hover .tooltiptext {
+visibility: visible;
+opacity: 1;
+}
+
+.kalkulator-kalorii {
+margin-top: 40px;
+}
+
+.kalkulator-kalorii label {
+display: block;
+margin-top: 10px;
+}
+
+.kalkulator-kalorii button {
+margin-top: 10px;
+}
+
+.kalk-pos label {
+display: block;
+margin-top: 20px; /* Zwiększony margines pionowy */
+}
+
+.kalk-pos input {
+margin-bottom: 10px; /* Dodany margines poniżej pola wejściowego */
+}
+
+.kalkulator-kalorii button {
+margin-top: 5px;
+margin-bottom: 20px;
+}
+
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <i class="fas fa-bars mobile-menu-icon" id="mobileMenuIcon"></i>
+        <div class="container_menu">
+            <div class="menu-item">
+                <a class="menu-title" href="/">Logowanie</a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-title" href="/calc">Kalkulator</a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-title" href="/przepisy">Przepisy</a>
+            </div>
+            <div class="menu-item-user">
+                {% if user.is_authenticated %}
+                    <p>Witaj, <b>{{ user.username }}</b>!</p>
+                {% else %}
+                    <p>Nie jesteś zalogowany.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+<h4>Oblicz dzienną ilość dostarczanych kalorii z posiłków</h4><br>
+<div class="kalk-pos">
+<label class="tooltip" for="bialko">Białko (w gramach):
+    <span class="tooltiptext">Ilość białka potrzebnego do zbudowania i regeneracji mięśni.</span>
+</label>
+<input type="number" id="bialko" placeholder="wartość białka" required><br>
+
+<label class="tooltip" for="weglowodany">Węglowodany (w gramach):
+    <span class="tooltiptext">Główny źródło energii dla organizmu.</span>
+</label>
+<input type="number" id="weglowodany" placeholder="wartość węglowodanów" required><br>
+
+<label class="tooltip" for="tluszcze">Tłuszcze (w gramach):
+    <span class="tooltiptext">Zapewniają energię i są ważne dla funkcji komórkowych.</span>
+</label>
+<input type="number" id="tluszcze" placeholder="wartość tłuszczy" required><br>
+
+
+<button onclick="obliczKalorie()" class="btn btn-primary mt-3">Oblicz</button>
+<button onclick="resetujFormularz()" class="btn btn-primary mt-3">Resetuj</button>
+
+<p id="wynik"></p>
+
+
+<div class="kalkulator-kalorii">
+    <h4>Kalkulator spalonych kalorii</h4>
+
+    <label for="spaloneKalorie">Ilość spalonych kalorii (kcal):</label>
+    <input type="number" id="spaloneKalorie" placeholder="0" required><br>
+
+    <button onclick="obliczCzas()" class="btn btn-primary mt-3">Oblicz</button>
+
+    <p id="czasRower">Czas jazdy na rowerze: <span id="wynikRower"></span></p>
+    <p id="czasPlywanie">Czas pływania na basenie: <span id="wynikPlywanie"></span></p>
+    <p id="czasBieganie">Czas biegania: <span id="wynikBieganie"></span></p>
+</div>
+</div>
+<script>
+    function obliczKalorie() {
+        var bialko = parseFloat(document.getElementById("bialko").value);
+        var weglowodany = parseFloat(document.getElementById("weglowodany").value);
+        var tluszcze = parseFloat(document.getElementById("tluszcze").value);
+
+        if (isNaN(bialko) || isNaN(weglowodany) || isNaN(tluszcze) || bialko <= 0 || weglowodany <= 0 || tluszcze <= 0) {
+            alert("Wprowadź poprawne wartości!");
+            return;
+        }
+
+        var kalorie = (bialko * 4) + (weglowodany * 4) + (tluszcze * 9);
+
+        var wynikElement = document.getElementById("wynik");
+        wynikElement.innerHTML = "Szacunkowa ilość kalorii: " + kalorie + " kcal";
+
+        var aktywnosc = "";
+        if (kalorie >= 2000) {
+            aktywnosc = "Możesz utrzymać umiarkowaną aktywność fizyczną.";
+        } else {
+            aktywnosc = "Rozważ zwiększenie ilości spożywanych kalorii, aby utrzymać zdrową aktywność fizyczną.";
+        }
+
+        wynikElement.innerHTML += "<br>" + aktywnosc;
+    }
+
+    function resetujFormularz() {
+        document.getElementById("bialko").value = "";
+        document.getElementById("weglowodany").value = "";
+        document.getElementById("tluszcze").value = "";
+        document.getElementById("wynik").innerHTML = "";
+    }
+</script>
+
+<script>
+    function obliczCzas() {
+        var spaloneKalorie = parseFloat(document.getElementById("spaloneKalorie").value);
+
+        if (isNaN(spaloneKalorie) || spaloneKalorie <= 0) {
+            alert("Wprowadź poprawną ilość spalonych kalorii!");
+            return;
+        }
+
+        var czasRower = spaloneKalorie / 240; // Założenie: 240 kcal/h jazdy na rowerze
+        var czasPlywanie = spaloneKalorie / 350; // Założenie: 350 kcal/h pływania
+        var czasBieganie = spaloneKalorie / 100; // Założenie: 100 kcal/1 km biegu
+
+        var wynikRower = document.getElementById("wynikRower");
+        wynikRower.innerHTML = czasRower.toFixed(2) + " godziny";
+
+        var wynikPlywanie = document.getElementById("wynikPlywanie");
+        wynikPlywanie.innerHTML = czasPlywanie.toFixed(2) + " godziny";
+
+        var wynikBieganie = document.getElementById("wynikBieganie");
+        wynikBieganie.innerHTML = czasBieganie.toFixed(2) + " godziny";
+    }
+</script>
+</body>
+</html>
