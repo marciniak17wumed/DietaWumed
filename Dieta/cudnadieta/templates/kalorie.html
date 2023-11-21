@@ -166,13 +166,13 @@ margin-bottom: 20px;
             <div class="menu-item">
                 <a class="menu-title" href="/przepisy">Przepisy</a>
             </div>
-            <div class="menu-item-user">
-                {% if user.is_authenticated %}
-                    <p>Witaj, <b>{{ user.username }}</b>!</p>
-                {% else %}
-                    <p>Nie jesteś zalogowany.</p>
-                {% endif %}
-            </div>
+           <div class="menu-item-user">
+    {% if user.is_authenticated %}
+        <p>Witaj, <b>{{ user.username }}</b>! <a href="{% url 'logout' %}">Wyloguj</a></p>
+    {% else %}
+        <p>Nie jesteś zalogowany.</p>
+    {% endif %}
+</div>
         </div>
     </div>
 
