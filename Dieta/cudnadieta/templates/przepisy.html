@@ -27,24 +27,23 @@
             font-size: 25px;
         }
 
-        .container {
-            width: 80%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 60px;
-        }
+.container {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+}
 
-        .container_menu {
-            width: 80%;
-            display: flex;
-            justify-content: flex-end;
-            padding: 10px;
-            text-align: center;
-        }
+.container_menu {
+  width: 80%;
+  display: flex;
+  padding: 10px;
+  text-align: center;
+}
 
-        @media (max-width: 1200px) {
+@media (max-width: 1200px) {
 .container_menu {
   width: 100%;
   }
@@ -62,109 +61,75 @@
 @media (max-width: 1200px) {
 .menu-item {
   width: 100%;
-  padding: 5px;
   }
 }
 
+.menu-title {
+  cursor: pointer;
+  color: #2b3d4b;
+  text-decoration: none;
+}
 
+.menu-item-user {
+    margin-left: 10px;
+    color: black;
+}
 
-        .menu-title {
-            cursor: pointer;
-            color: #2b3d4b;
-            text-decoration: none;
-        }
+.menu-title:hover {
+  color: #3e87ba;
+}
 
-        .menu-item-user {
-            margin-left: 50px;
-            color: black;
-        }
+.menu-title-nolink {
+  cursor: default;
+  color: #2b3d4b;
+  text-decoration: none;
+}
 
-        .menu-title:hover {
-            color: #3e87ba;
-        }
+.non-link {
+  cursor: default;
+  pointer-events: none;
+  color: #2b3d4b;
+  text-decoration: none;
+}
 
-        .menu-title-nolink {
-            cursor: default;
-            color: #2b3d4b;
-            text-decoration: none;
-        }
-
-        .submenu {
-            display: none;
-            background-color: white;
-            position: absolute;
-            padding: 10px;
-            z-index: 1;
-            text-align: center;
-            min-width: 100%;
-        }
-
-        .submenu::before {
-            content: "";
-            display: block;
-            width: 100%;
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
-        }
-
-        .menu-item:hover .submenu {
-            display: block;
-        }
-
-        .submenu a {
-            text-decoration: none;
-            display: block;
-            padding: 3px 0;
-            color: #47375b;
-            transition: border-bottom 0.3s;
-            border-bottom: 2px solid transparent;
-        }
-
-        .submenu a:hover {
-            color: #3e87ba;
-            border-bottom: 2px solid #3e87ba;
-        }
-
-        .non-link {
-            cursor: default;
-            pointer-events: none;
-            color: #2b3d4b;
-            text-decoration: none;
-        }
-
-        .last-item {
-            margin-right: 0;
-        }
-    </style>
+.last-item {
+  margin-right: 50px;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <i class="fas fa-bars mobile-menu-icon" id="mobileMenuIcon"></i>
-        <div class="container_menu">
-            <div class="menu-item">
-                <a class="menu-title" href="/">Logowanie</a>
-            </div>
-            <div class="menu-item">
-                <a class="menu-title" href="/info">Informacje</a>
-            </div>
+  <div class="container">
 
-            <div class="menu-item">
-                <a class="menu-title" href="/calc">Kalkulator</a>
-            </div>
+      <div class="menu-item">
+        <a class="menu-title" href="/">Logowanie</a>
+      </div>
 
-            <div class="menu-item">
+      <div class="menu-item">
+        <a class="menu-title" href="/info">Informacje</a>
+      </div>
+
+      <div class="menu-item">
+        <a class="menu-title" href="/przepisy">Przepisy</a>
+      </div>
+
+        <div class="menu-item">
                 <a class="menu-title" href="/kalorie">Kalorie</a>
             </div>
 
-            <div class="menu-item-user">
+        <div class="menu-item">
+        <a class="menu-title" href="/snake">Rozrywka</a>
+      </div>
+
+        <div class="menu-item">
     {% if user.is_authenticated %}
         <p>Witaj, <b>{{ user.username }}</b>! <a href="{% url 'logout' %}">Wyloguj</a></p>
     {% else %}
         <p>Nie jesteś zalogowany.</p>
     {% endif %}
 </div>
-        </div>
     </div>
+  </div>
 
 
     <style>
